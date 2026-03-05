@@ -38,32 +38,3 @@
     </div>
   </div>
 </section>
-
-<script>
-  const form = document.getElementById('contact-form') as HTMLFormElement;
-
-  form.addEventListener('submit', async (e: SubmitEvent) => {
-    e.preventDefault();
-
-    const payload = {
-      name: (document.getElementById('name') as HTMLInputElement)?.value,
-      email: (document.getElementById('email') as HTMLInputElement)?.value,
-      message: (document.getElementById('message') as HTMLTextAreaElement)?.value,
-    };
-
-    console.log('Enviando:', payload); // verifica en consola del navegador
-
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    if (res.ok) alert('¡Mensaje enviado!');
-    else {
-      const err = await res.text();
-      console.error('Error:', err);
-      alert('Hubo un error, intenta de nuevo.');
-    }
-  });
-</script>
